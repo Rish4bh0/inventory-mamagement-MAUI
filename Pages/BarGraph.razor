@@ -1,0 +1,44 @@
+﻿@page "/bargraph"
+@using Inventory_Management.Data;
+@using Inventory_Management.Services;
+
+<main>
+    <h3>Bar Graph</h3>
+
+    @foreach (var data in datas)
+    {
+        var item = ItemService.FetchItemById(data.ItemId);
+        data.ItemName = item.Name;
+    }
+
+    <SfChart Title="Inventory Item" Palettes="@palettes" Width="80%" Background="#fafafa">
+        <ChartArea>
+            <ChartAreaBorder Color="#5b5b5b" Width="1" />
+        </ChartArea>
+
+        <ChartPrimaryXAxis ValueType="Syncfusion.Blazor.Charts.ValueType.Category"></ChartPrimaryXAxis>
+        <ChartSeriesCollection>
+            <ChartSeries DataSource="@datas" XName="ItemName" YName="Quantity" Type="ChartSeriesType.Column">
+            </ChartSeries>
+        </ChartSeriesCollection>
+    </SfChart>
+
+    @if(datas.Count < 1)
+    {
+        <p>No Data Available</p>
+    }
+</main>
+
+
+@code {
+    private List<ItemGraphData> datas { get; set; }
+
+
+    protected override void OnInitialized()
+    {
+        Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mgo+DSMBaFt/QHRqVVhjVFpFaVxCQmFJfFBmTWlaeFR1cEU3HVdTRHRdQ19gSH5bckNmX3hfcXY=;Mgo+DSMBPh8sVXJ0S0J+XE9HflRDQmBJYVF2R2BJd1Rzc19DZEwgOX1dQl9hSHxQd0VrXXlbdnNXQGI=;ORg4AjUWIQA/Gnt2VVhkQlFadVdJXHxKfkx0RWFab1Z6d1JMZVhBNQtUQF1hS39RdURjUXtYdXJSQmJe;ODQ4OTYyQDMyMzAyZTM0MmUzMGxHcDd1eW9zV0VKNTRzaTQwREJQMTYyQ3hYZXFiVmkyWkZrYkhxQm11QVU9;ODQ4OTYzQDMyMzAyZTM0MmUzMEdyN0ZoQ0dLZ1lSZzkvN1NZb05oOWJPZ29JN0t1bEFOZnpiV0xLT09zeFE9;NRAiBiAaIQQuGjN/V0Z+WE9EaFxKVmJWfVNpR2NbfE54flZBallVVAciSV9jS3xSdEZiWXdadnFTTmBZUw==;ODQ4OTY1QDMyMzAyZTM0MmUzME1MWWwxcm1CQmt1engrdHNzYmtKMStjSFF2endzNytYMGlZWkMvejZVUjQ9;ODQ4OTY2QDMyMzAyZTM0MmUzMGk0ZkRkenN1RE1IaE55MFIxb2FiSmQzeUJvQkp6YjM4ZS9JRDNTNXRvQnc9;Mgo+DSMBMAY9C3t2VVhkQlFadVdJXHxKfkx0RWFab1Z6d1JMZVhBNQtUQF1hS39RdURjUXtYdXJdQGZe;ODQ4OTY4QDMyMzAyZTM0MmUzMFdxUk51N2JYUjdEamM5ZmwvN3d5N1E0aHZWTmQ0MUN6WFBwcG5tNUFyYUE9;ODQ4OTY5QDMyMzAyZTM0MmUzMGRvcEl0VDNJbUJOcGJCUUNFQWhvNlArNTNvK2l1L0szY2w2TUx0ektNUTA9;ODQ4OTcwQDMyMzAyZTM0MmUzME1MWWwxcm1CQmt1engrdHNzYmtKMStjSFF2endzNytYMGlZWkMvejZVUjQ9");
+        datas = ItemService.ItemTakenData();
+    }
+
+    public String[] palettes = new String[] { "#0080ff" };
+}

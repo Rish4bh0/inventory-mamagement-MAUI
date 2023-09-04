@@ -1,0 +1,102 @@
+﻿@page "/login"
+@inject NavigationManager NavManager
+@using System.Data;
+@using Inventory_Management.Data;
+@using Inventory_Management.Services;
+
+<main>
+    <div class="box">
+        <div class="login-wrapper">
+            @if (showCredentialHint)
+            {
+                <section>
+                    <p>Username : admin</p>
+                    <p>Password : admin</p>
+                </section>
+            }
+            <h1>Log In</h1>
+            <form @onsubmit="handleLogin" class="login-form">
+                @if (message.Length > 0)
+                {
+                    <p>
+                        <span class="oi oi-warning"></span>
+                        @message
+                    </p>
+
+                }
+
+                <input type="text" @bind="@userName" placeholder="Username" />
+
+                <input type="@passType" @bind="@password" placeholder="Password" />
+
+                <label for="show-password">
+                    <input type="checkbox" id="show-password" @onchange="handlePassword" />
+                    Show password
+                </label>
+
+
+                <button>
+                    <span class="@loginStatus"></span> Login
+                </button>
+            </form>
+        </div>
+    </div>
+</main>
+
+@code {
+    [CascadingParameter]
+    private GlobalUser globalUser { get; set; }
+    private bool displayDefaultCredential { get; set; }
+    private string userName { get; set; }
+    private string password { get; set; }
+    private bool showCredentialHint { get; set; }
+    public string message = "";
+    public string passType = "password";
+    public string loginStatus = "oi oi-account-login";
+
+    protected override void OnInitialized()
+    {
+        try
+        {
+            var user = UserService.Login(UserService.DefaultUserName, UserService.DefaultPassword);
+            showCredentialHint = user.HasInitialPassword;
+        }
+        catch { }
+
+        globalUser.CurrentUser = null;
+        message = "";
+    }
+
+    public void handlePassword()
+    {
+        passType = passType == "password" ? "text" : "password";
+    }
+
+    public void handleLogin()
+    {
+        loginStatus = "spinner-border spinner-border-sm";
+
+        if (userName == null || password == null)
+        {
+            message = "Please provide complete credentials!";
+            loginStatus = "oi oi-account-login";
+            return;
+        }
+
+        try
+        {
+            globalUser.CurrentUser = UserService.Login(userName, password);
+
+            if (globalUser.CurrentUser != null)
+            {
+                NavManager.NavigateTo(globalUser.CurrentUser.HasInitialPassword ? "/update" : "/");
+            }
+        }
+        catch (Exception e)
+        {
+            message = e.Message;
+        }
+
+        loginStatus = "oi oi-account-login";
+    }
+}

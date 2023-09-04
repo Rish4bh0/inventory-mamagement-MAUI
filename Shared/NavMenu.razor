@@ -1,0 +1,80 @@
+﻿@using Inventory_Management.Data;
+@using Inventory_Management.Services;
+
+<div class="top-row ps-3 navbar">
+    <a class="navbar-brand" href="item">Inventory</a>
+    <div class="container-fluid">
+        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="oi oi-menu"></span>
+        </button>
+    </div>
+</div>
+
+<section class='@(navCollapse != null ? "nav-back" : "")' @onclick="ToggleNavMenu"></section>
+<div class="nav @navCollapse" @onclick="ToggleNavMenu">
+   
+    <nav class="flex-column">
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="item" Match="NavLinkMatch.All">
+                <span class="oi oi-dashboard" aria-hidden="true"></span> Items
+            </NavLink>
+        </div>
+
+        @if (userType == UserType.Admin)
+        {
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="record" Match="NavLinkMatch.All">
+                    <span class="oi oi-inbox" aria-hidden="true"></span> Records
+                </NavLink>
+            </div>
+
+             <div class="nav-item px-3">
+                <NavLink class="nav-link" href="request" Match="NavLinkMatch.All">
+                    <span class="oi oi-cloud-download" aria-hidden="true"></span> Request
+                </NavLink>
+            </div>
+
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="staffs">
+                    <span class="oi oi-person" aria-hidden="true"></span> Users
+                </NavLink>
+            </div>
+        }
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="update">
+                <span class="oi oi-pencil" aria-hidden="true"></span> Change Password
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="bargraph" Match="NavLinkMatch.All">
+                <span class="oi oi-dashboard" aria-hidden="true"></span> Bar Chart
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3 last-menu">
+            <button class="logout" @onclick="HandleLogout"><span class="oi oi-account-logout" /> Logout</button>
+        </div>
+    </nav>
+</div>
+
+@code {
+    [Parameter]
+    public string username { get; set; }
+    [Parameter]
+    public UserType userType { get; set; }
+    [Parameter]
+    public EventCallback HandleLogout { get; set; }
+
+    string navCollapse = null;
+
+    private bool collapseNavMenu = true;
+
+    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        navCollapse = navCollapse == "navCollapse" ? null : "navCollapse";
+    }
+}

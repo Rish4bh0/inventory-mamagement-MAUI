@@ -1,0 +1,87 @@
+﻿@page "/update"
+@using Inventory_Management.Data;
+@using Inventory_Management.Services;
+
+<main>
+    
+
+    <h3>Change Password</h3>
+
+
+   
+    {
+
+        <form @onsubmit="handleChangePassword">
+            <input type="password" @bind="@currentPassword" placeholder="Current Password" />
+            <input type="@passType" @bind="@newPassword" placeholder="New Password" />
+            <input type="@passType" @bind="@confirmPassword" placeholder="Confirm New Password" />
+
+            <label for="show-password">
+                <input type="checkbox" id="show-password" @onchange="handlePassword" />
+                Show password
+            </label>
+
+            <button>Change Password</button>
+        </form>
+   
+
+    @if (message.Length > 0)
+    {
+        <p class="message-@messageSucess"><span class="oi oi-@messageSucess"></span>@message</p>
+    }
+</main>
+
+@code {
+    [CascadingParameter]
+    private GlobalUser globalUser { get; set; }
+    private string currentPassword { get; set; }
+    private string newPassword { get; set; }
+    private string confirmPassword { get; set; }
+    string message = "";
+    string passType = "password";
+    string messageSucess = "warning";
+
+    public void handlePassword()
+    {
+        passType = passType == "password" ? "text" : "password";
+    }
+
+    public void handleChangePassword()
+    {
+        if (currentPassword == null)
+        {
+            messageSucess = "warning";
+            message = "Please enter your current password";
+            return;
+        }
+
+        if (newPassword == null || confirmPassword == null)
+        {
+            messageSucess = "warning";
+            message = "New password cannot be empty!";
+            return;
+        }
+
+        if (newPassword != confirmPassword)
+        {
+            messageSucess = "warning";
+            message = "Please confirm your password!";
+            return;
+        }
+
+        try
+        {
+            globalUser.CurrentUser = UserService.ChangeUserPassword(globalUser.CurrentUser.Id, currentPassword, newPassword);
+            messageSucess = "info";
+            message = "Password changed sucessfully";
+            newPassword = "";
+            confirmPassword = "";
+            currentPassword = "";
+        }
+        catch (Exception e)
+        {
+            messageSucess = "warning";
+            message = e.Message;
+        }
+    }
+}

@@ -1,0 +1,20 @@
+﻿main {
+    display: block;
+    position: relative;
+}
+
+    main > h3 {
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #1b1b1b;
+    }
+
+    p{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-80%, -50%);
+        font-weight: bold;
+        font-size: 1.5rem;
+        color: #2b2b2b;
+    }

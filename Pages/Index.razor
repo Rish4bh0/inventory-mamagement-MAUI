@@ -1,0 +1,20 @@
+﻿@page "/"
+@inject NavigationManager NavManager
+@using Inventory_Management.Data;
+
+@code {
+    [CascadingParameter]
+    private GlobalUser globalUser { get; set; }
+
+    protected override void OnInitialized()
+    {
+        if(globalUser?.CurrentUser == null)
+        {
+            NavManager.NavigateTo("/login");
+        }
+        else
+        {
+            NavManager.NavigateTo("/item");
+        }
+    }
+}

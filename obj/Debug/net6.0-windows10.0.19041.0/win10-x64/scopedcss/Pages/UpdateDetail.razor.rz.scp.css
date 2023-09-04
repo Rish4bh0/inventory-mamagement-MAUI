@@ -1,0 +1,122 @@
+*[b-76v10ltt17] {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main[b-76v10ltt17] {
+    display: block;
+}
+
+    main > ul[b-76v10ltt17] {
+        display: flex;
+        list-style: none;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid #000000;
+        padding: 0 1rem;
+    }
+
+        main > ul > li > a[b-76v10ltt17] {
+            font-size: 0.85rem;
+            color: #999999;
+            font-weight: bold;
+            padding: 0.35rem 0.5rem;
+            text-decoration: none;
+            cursor: pointer;
+            display: block;
+            top: 2px;
+            position: relative;
+        }
+
+.active[b-76v10ltt17] {
+    color: #000000;
+    border: 2px solid #000000;
+    border-bottom: 2px solid white;
+    border-radius: 0.3rem 0.3rem 0 0;
+}
+
+main h3[b-76v10ltt17] {
+    font-size: 1.35rem;
+    color: #181818;
+    font-weight: bold;
+    line-height: 1.7;
+    text-transform: capitalize;
+}
+
+main p[b-76v10ltt17] {
+    border-radius: 0.3rem;
+    width: fit-content;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    background-color: #00ce0083;
+    border: 1px dashed #cecece;
+}
+
+main form[b-76v10ltt17] {
+    max-width: 370px;
+    display: block;
+}
+
+    main form input[b-76v10ltt17] {
+        display: block;
+        width: 100%;
+        border: 2px solid #000000;
+        border-radius: 0.3rem;
+        padding: 0.35rem 0.5rem;
+        margin-bottom: 1rem;
+        outline: none;
+    }
+
+    main form button[b-76v10ltt17] {
+        display: block;
+        width: fit-content;
+        border: none;
+        border-radius: 0.3rem;
+        color: white;
+        padding: 0.5rem 0.7rem;
+        background-color: #2065D1;
+    }
+
+        main form button:hover[b-76v10ltt17] {
+            background-color: #1a4d9e;
+        }
+
+main > form > label > input[type="checkbox"][b-76v10ltt17] {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding: 0.5rem;
+    border-radius: 0.15rem;
+    outline: none;
+    border: 1px solid #909090;
+    font-size: 0.85rem;
+    margin-right: 0.57rem;
+    cursor: pointer;
+}
+
+main > form > label[b-76v10ltt17] {
+    margin-bottom: 0.7rem;
+    cursor: pointer;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    margin-right: 1.5rem;
+    width: fit-content;
+    color: #606060;
+}
+
+.message-warning[b-76v10ltt17] {
+    margin-top: 1rem;
+    background-color: #ff0000;
+}
+
+.message-info[b-76v10ltt17] {
+    margin-top: 1rem;
+    background-color: #00ce0083;
+}
+
+    .message-info span[b-76v10ltt17], .message-warning span[b-76v10ltt17] {
+        margin-right: 0.5rem;
+    }

@@ -1,0 +1,36 @@
+﻿@inherits LayoutComponentBase
+@using Inventory_Management.Data;
+@using Inventory_Management.Services;
+@inject NavigationManager NavManager
+
+<div class="page">
+    @if (globalUser.CurrentUser != null)
+    {
+        <div class="sidebar">
+            <NavMenu username="@globalUser.CurrentUser.UserName" userType="@globalUser.CurrentUser.UType" HandleLogout="HandleLogout" />
+        </div>
+    }
+
+    <main>
+        <article class="content">
+            <CascadingValue Value="@globalUser">
+                @Body
+            </CascadingValue>
+        </article>
+    </main>
+</div>
+
+@code {
+    private GlobalUser globalUser = new();
+
+    protected override void OnInitialized()
+    {
+        UserService.SeedUserData();
+    }
+
+    private void HandleLogout()
+    {
+        globalUser.CurrentUser = null;
+        NavManager.NavigateTo("/login");
+    }
+}

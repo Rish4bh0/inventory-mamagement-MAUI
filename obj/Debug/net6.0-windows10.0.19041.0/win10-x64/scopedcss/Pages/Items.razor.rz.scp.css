@@ -1,0 +1,382 @@
+*[b-corelpyf45] {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main[b-corelpyf45] {
+    display: block;
+}
+
+    main > div[b-corelpyf45] {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        max-width: 830px;
+    }
+
+        main > div > h3[b-corelpyf45] {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #1b1b1b;
+        }
+
+        main > div > button[b-corelpyf45] {
+            font-size: 0.85rem;
+            font-weight: bold;
+            border: none;
+            border: 2px solid #000000;
+            background-color: transparent;
+            color: #000000;
+            padding: 0.57rem;
+            transition: 0.15s ease-in-out;
+        }
+
+            main > div > button:hover[b-corelpyf45] {
+                color: white;
+                background-color: #256dcf;
+            }
+
+            main > div > button > span[b-corelpyf45] {
+                font-size: 0.7rem;
+                margin-right: 0.35rem;
+            }
+
+    main > table[b-corelpyf45] {
+        display: block;
+        overflow-x: auto;
+        margin-top: 1rem;
+        border: 2px solid #000000;
+        max-width: fit-content;
+        position: relative;
+    }
+
+        main > table td:first-child[b-corelpyf45], th:first-child[b-corelpyf45] {
+            min-width: 150px;
+        }
+
+        main > table td:nth-child(2)[b-corelpyf45], th:nth-child(2)[b-corelpyf45] {
+            min-width: 90px;
+        }
+
+        main > table td:nth-child(3)[b-corelpyf45], th:nth-child(3)[b-corelpyf45] {
+            min-width: 93px;
+        }
+
+        main > table td:nth-child(4)[b-corelpyf45], th:nth-child(4)[b-corelpyf45] {
+            min-width: 160px;
+        }
+
+        main > table td:nth-child(5)[b-corelpyf45], th:nth-child(5)[b-corelpyf45] {
+            min-width: 99px;
+        }
+
+        main > table td:nth-child(6)[b-corelpyf45], th:nth-child(6)[b-corelpyf45] {
+            min-width: 180px;
+        }
+
+        main > table td:last-child[b-corelpyf45], th:last-child[b-corelpyf45] {
+            min-width: 230px;
+            text-align: left;
+        }
+
+        main > table tr:nth-child(2n)[b-corelpyf45] {
+            background: #afafaf35;
+        }
+
+        main > table > thead[b-corelpyf45] {
+            border-bottom: 2px solid #000000;
+        }
+
+        main > table > tbody > tr[b-corelpyf45] {
+            cursor: pointer;
+            border-bottom: 1px #000000;
+        }
+
+            main > table > tbody > tr:last-child[b-corelpyf45] {
+                border: none;
+            }
+
+        main > table > thead > tr > th[b-corelpyf45] {
+            font-size: 1rem;
+            color: #000000;
+            color: #000000;
+            padding: 0.5rem;
+            border-right: 2px solid #000000;
+            text-align: center;
+        }
+
+        main > table td[b-corelpyf45] {
+            padding: 0.5rem;
+            font-size: 0.9rem;
+            border-right: 2px solid #000000;
+        }
+
+td:last-child[b-corelpyf45], th:last-child[b-corelpyf45] {
+    border: none;
+}
+
+td:last-child[b-corelpyf45]{
+    display: flex;
+}
+
+main > table > tbody > tr > td:last-child[b-corelpyf45] {
+    text-align: center;
+}
+
+
+td > button[b-corelpyf45] {
+    padding: 0.5rem;
+    border: 2px solid #000000;
+    color: #000000;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    margin: auto;
+    transition: 0.15s ease-in-out;
+}
+
+    td > button:hover[b-corelpyf45], .takeout-dialog > div > button:hover[b-corelpyf45] {
+        background-color: #e33030;
+        color: white !important;
+    }
+
+    td > button > span[b-corelpyf45] {
+        margin-right: 0.5rem;
+    }
+
+.emptyTable[b-corelpyf45] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    padding: 5rem;
+}
+
+    .emptyTable[b-corelpyf45]::before {
+        content: "No items found!";
+        position: absolute;
+        width: 100%;
+        height: calc(100% - 42px);
+        top: 42px;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #a0a0a0;
+        font-weight: bold;
+        line-height: 4;
+    }
+
+.background[b-corelpyf45] {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #00000092;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    min-height: 500px;
+    overflow: auto;
+}
+
+.action-modal[b-corelpyf45] {
+    background: green;
+}
+
+    .action-modal > div[b-corelpyf45] {
+        padding: 1rem;
+        width: 100%;
+        max-width: 450px;
+        background-color: white;
+        border-radius: 0.35rem;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+
+        .action-modal > div > h3[b-corelpyf45] {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #000000;
+            margin-bottom: 0.5rem;
+            line-height: 1.7;
+            text-align: center;
+        }
+
+        .action-modal > div > p[b-corelpyf45] {
+            background-color: #fe7d7dba;
+            margin: auto;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            font-weight: bold;
+            font-size: 0.87rem;
+            border-radius: 0.35rem;
+            width: fit-content;
+            color: #333333;
+        }
+
+        .action-modal > div > form > label[b-corelpyf45] {
+            grid-template-columns: 5.3rem auto;
+            display: grid;
+            align-items: center;
+            font-weight: bold;
+            color: #4c4c4c;
+            margin-bottom: 1rem;
+        }
+
+        .action-modal > div > form input[b-corelpyf45] {
+            display: block;
+            width: 100%;
+            padding: 0.35rem;
+            outline: none;
+            border: 2px solid #000000;
+            border-radius: 0.25rem;
+        }
+
+        .action-modal > div > form > input[b-corelpyf45] {
+            margin-bottom: 1rem;
+        }
+
+        .action-modal > div > form button[b-corelpyf45] {
+            display: block;
+            border: none;
+            background-color: #256dcf;
+            color: white;
+            border-radius: 0.25rem;
+            margin-top: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            font-weight: bold;
+            float: right;
+        }
+
+            .action-modal > div > form button:hover[b-corelpyf45] {
+                background-color: #1e5aab;
+            }
+
+delete-dialog-wrapper[b-corelpyf45] {
+    display: block;
+}
+
+.delete-background[b-corelpyf45] {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    backdrop-filter: blur(3px);
+}
+
+.delete-dialog[b-corelpyf45], .takeout-dialog[b-corelpyf45] {
+    width: 100%;
+    position: fixed;
+    max-width: 300px;
+    padding: 0.7rem;
+    border-radius: 0.23rem;
+    border: 2px solid #000000;
+    background: #ffffff;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+    .delete-dialog h2[b-corelpyf45], .takeout-dialog h2[b-corelpyf45] {
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #942a2a;
+    }
+
+    .takeout-dialog h2[b-corelpyf45] {
+        color: #000000;
+        line-height: 1.7;
+    }
+
+    .takeout-dialog input[b-corelpyf45] {
+        display: block;
+        width: 100%;
+        padding: 0.35rem 0.5rem;
+    }
+
+    .delete-dialog p[b-corelpyf45], .takeout-dialog p[b-corelpyf45] {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 0.7rem;
+    }
+
+        .takeout-dialog p[b-corelpyf45]{
+            background-color: #f67e7e;
+            color: #1b1b1b;
+            padding: 0.5rem;
+            border-radius: 0.17rem;
+        }
+
+        .takeout-dialog > div[b-corelpyf45] {
+            margin-top: 1rem;
+        }
+
+            .delete-dialog > div > button[b-corelpyf45], .takeout-dialog > div > button[b-corelpyf45] {
+                padding: 0.35rem 0.5rem;
+                background-color: white;
+                outline: none;
+                color: #000000;
+                font-weight: bold;
+                font-size: 0.85rem;
+                border: 2px solid #000000;
+                border-radius: 0.23rem;
+            }
+
+.delete-dialog > div > button:hover[b-corelpyf45] {
+    background-color: #e33030;
+    color: white;
+}
+
+.cancel[b-corelpyf45] {
+    color: #333333 !important;
+    border-color: #333333 !important;
+    margin-right: 0.5rem;
+}
+
+    .cancel:hover[b-corelpyf45] {
+        background-color: #333333 !important;
+        color: white !important;
+    }
+
+.delete[b-corelpyf45], .edit[b-corelpyf45], .takeout[b-corelpyf45] {
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+}
+
+.delete[b-corelpyf45], .edit[b-corelpyf45]{
+    width: 3rem;
+    height: 2.5rem;
+    display: block;
+    
+}
+
+.delete > span[b-corelpyf45], .edit > span[b-corelpyf45]{
+    font-size: 1rem;
+    transform: translateX(2.5px);
+}
+
+.edit[b-corelpyf45] {
+    color: #000000;
+    border-color: #000000;
+}
+
+    .edit:hover[b-corelpyf45] {
+        background-color: #474747;
+    }
+
+.takeout[b-corelpyf45], .takeout-dialog > div > button:first-child[b-corelpyf45] {
+    color: #000000;
+    border-color: #000000;
+}
+
+    .takeout:hover[b-corelpyf45], .takeout-dialog > div > button:first-child:hover[b-corelpyf45] {
+        background: #279119;
+    }

@@ -1,0 +1,161 @@
+﻿@page "/request"
+@using Inventory_Management.Data;
+@using Inventory_Management.Services;
+
+<h3>Requests</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Total Price</th>
+            <th>Date Requested</th>
+            <th>Requested By</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @if (histories != null && histories.Count > 0)
+        {
+            @foreach (var history in histories)
+            {
+                <tr>
+                    @{
+                        var item = ItemService.FetchItemById(history.ItemId);
+                    }
+                    <td>@item.Name</td>
+                    <td>@history.Quantity</td>
+                    <td>@item.UnitPrice</td>
+                    <td>
+                        @(
+                            item.UnitPrice * history.Quantity
+                            )
+                    </td>
+                    <td>@history.DateRequested.ToString("dd MMM, yyyy hh:mm tt")</td>
+                    <td>
+                        @{
+                            var takenBy = UserService.FetchUserById(history.TakenBy);
+                            <span>
+                                @(
+                                takenBy == null ? "system" : (takenBy.FirstName + ' ' + takenBy.LastName)
+                                    )
+                            </span>
+                        }
+                    </td>
+
+                    <td>@history.Action</td>
+                    <td>
+                        <button class="approve" @onclick=@(()=> HandleDisplayApproveDialog(history)) ><span class="oi oi-check"></span>Approve</button>
+                        <button class="delete" @onclick=@(()=> HandleDisplayDeleteDialog(history))><span class="oi oi-delete"></span>Delete</button>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr class="emptyTable"></tr>
+        }
+    </tbody>
+</table>
+
+@if (DisplayDeleteDialog)
+{
+    <section class="background" @onclick=@(() => {DisplayDeleteDialog=false; ErrorMessage="";})></section>
+    <div>
+        <h3>Reject Takeout</h3>
+        @if (ErrorMessage.Length > 0)
+        {
+            <p class="error"><span class="oi oi-warning"></span> @ErrorMessage</p>
+        }
+        <p>
+            Do you really want to disapprove @{
+                var item = ItemService.FetchItemById(DisapproveItem.ItemId);
+                <span>@item.Name</span>
+            }
+        </p>
+        <button @onclick="@HandleDelete" class="disapprove">Disapprove</button>
+        <button @onclick=@(() => DisplayDeleteDialog=false)> Cancel</button>
+    </div>
+}
+
+@if (DisplayApproveDialog)
+{
+    <section class="background" @onclick=@(() => {DisplayApproveDialog=false; ErrorMessage="";})></section>
+<div>
+        <h3>Approve Takeout</h3>
+        @if (ErrorMessage.Length > 0)
+        {
+            <p class="error"><span class="oi oi-warning"></span> @ErrorMessage</p>
+        }
+        <p>
+            Do you really want to approve @{
+                var item = ItemService.FetchItemById(DisapproveItem.ItemId);
+                <span>@item.Name</span>
+            }
+        </p>
+        <button @onclick="@HandleApprove" class="approve">Approve</button>
+        <button @onclick=@(() => DisplayApproveDialog=false)> Cancel</button>
+    </div>
+}
+
+@code {
+    [CascadingParameter]
+    private GlobalUser globalUser { get; set; }
+    private List<ItemHistory> histories { get; set; }
+    private bool DisplayDeleteDialog { get; set; }
+    private bool DisplayApproveDialog { get; set; }
+    private ItemHistory DisapproveItem { get; set; }
+
+    protected override void OnInitialized()
+    {
+        histories = ItemService.FetchPendingItemHistory();
+    }
+
+    string ErrorMessage = "";
+
+    private void HandleDisplayDeleteDialog(ItemHistory record)
+    {
+        DisapproveItem = record;
+        DisplayDeleteDialog = true;
+    }
+
+    private void HandleDisplayApproveDialog(ItemHistory record)
+    {
+        DisapproveItem = record;
+        DisplayApproveDialog = true;
+    }
+
+    public void HandleDelete()
+    {
+        try
+        {
+            histories = ItemService.HandleTakeAction(DisapproveItem.Id, globalUser.CurrentUser.Id, ActionType.Reject);
+            histories = ItemService.FetchPendingItemHistory();
+            DisplayDeleteDialog = false;
+            ErrorMessage = "";
+        }
+        catch (Exception e)
+        {
+            ErrorMessage = e.Message;
+        }
+    }
+
+    public void HandleApprove()
+    {
+        try
+        {
+            histories = ItemService.HandleTakeAction(DisapproveItem.Id, globalUser.CurrentUser.Id, ActionType.Approve);
+            histories = ItemService.FetchPendingItemHistory();
+            DisplayApproveDialog = false;
+            ErrorMessage = "";
+        }
+        catch (Exception e)
+        {
+            ErrorMessage = e.Message;
+        }
+    }
+}
